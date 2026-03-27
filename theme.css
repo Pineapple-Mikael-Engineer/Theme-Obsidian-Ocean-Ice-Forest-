@@ -408,31 +408,48 @@ body, .app-container, .workspace {
 
 .nav-files-container { padding: 6px 4px !important; }
 
+/* ── Sidebar navigation ─────────────────────────────────────────── */
+.nav-files-container { 
+  padding: 6px 4px !important; 
+}
+
 .nav-file-title,
 .nav-folder-title {
+  /* NO usar padding shorthand - respetar indentación de Obsidian */
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  padding-right: 10px !important;
+  /* padding-left lo controla Obsidian automáticamente */
+  
   border-radius: 6px !important;
   color: var(--text-muted) !important;
   font-size: 0.87em !important;
-  padding: 4px 10px !important;
-  transition: background 0.18s, color 0.18s, padding-left 0.15s !important;
+  transition: background 0.18s, color 0.18s, transform 0.15s !important;
 }
-.nav-file-title:hover, .nav-folder-title:hover {
+
+.nav-file-title:hover, 
+.nav-folder-title:hover {
   background-color: var(--sidebar-hover) !important;
   color: var(--text-primary) !important;
-  padding-left: 14px !important;
+  transform: translateX(4px) !important; /* Efecto visual sin romper layout */
 }
+
 .nav-file-title.is-active {
   background-color: var(--sidebar-active) !important;
   color: var(--text-primary) !important;
   border-left: 2px solid var(--sidebar-active-ln) !important;
   font-weight: 500 !important;
-  padding-left: 12px !important;
+  /* No forzar padding-left aquí tampoco */
 }
+
 .nav-folder-children {
   border-left: 1px dashed var(--border-subtle) !important;
-  margin-left: 12px !important;
+  /* NO usar margin-left - Obsidian maneja la indentación automática */
 }
-.nav-folder-title-content { font-weight: 600 !important; }
+
+.nav-folder-title-content { 
+  font-weight: 600 !important; 
+}
 
 /* ── Nota flotante ───────────────────────────────────────────── */
 .workspace-leaf-content[data-type="markdown"] {
