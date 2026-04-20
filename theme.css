@@ -466,12 +466,12 @@ body, .app-container, .workspace {
 .cm-editor, .cm-scroller, .markdown-reading-view { background-color: var(--bg-note) !important; }
 
 .markdown-preview-view .markdown-preview-sizer {
-  max-width: 820px !important;
+  max-width: 1025px !important;
   margin: 0 auto !important;
   padding: 48px 56px !important;
 }
 .cm-content {
-  max-width: 820px !important;
+  max-width: 1020px !important;
   margin: 0 auto !important;
   padding: 48px 56px !important;
 }
@@ -1381,4 +1381,316 @@ body, .app-container, .workspace {
   color: var(--text-secondary) !important;
   line-height: 1.88 !important;
   padding: 8px 16px 12px !important;
+}
+
+
+
+
+
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+   ║  OCEAN-ICE & FOREST  ·  Parche v5.2                              ║
+   ║  Añadir al FINAL de tu theme.css                                 ║
+   ╠═══════════════════════════════════════════════════════════════════╣
+   ║  CAMBIOS v5.2:                                                   ║
+   ║  · §A  Archivos embebidos e imágenes — visual mejorada           ║
+   ║  · §B  Fix text-transform en callouts matemáticos                ║
+   ║        (teorema/demo/def/corolario/lema/prop/axioma/ejemplo)     ║
+   ║  · §C  Fix indentación — listas dentro de callouts               ║
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+
+/* §A ══════════════════════════════════════════════════════════════
+   ARCHIVOS EMBEBIDOS · Imágenes, PDFs, descargables, enlaces
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Imágenes embebidas ─────────────────────────────────────── */
+.markdown-preview-view img {
+  border-radius: 10px !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-float) !important;
+  display: block !important;
+  margin: 22px auto !important;
+  max-width: 100% !important;
+  transition: box-shadow 0.25s, transform 0.25s !important;
+}
+.markdown-preview-view img:hover {
+  box-shadow: var(--shadow-deep) !important;
+  transform: scale(1.012) !important;
+}
+
+
+
+/* ── PDF embebido (<iframe> que genera Obsidian) ────────────── */
+.markdown-preview-view iframe {
+  border-radius: 10px !important;
+  border: 1px solid var(--border-medium) !important;
+  box-shadow: var(--shadow-float) !important;
+  display: block !important;
+  margin: 22px auto !important;
+  width: 100% !important;
+  min-height: 520px !important;
+}
+
+/* ── Bloque de archivo embebido (embed genérico) ────────────── */
+.markdown-preview-view .file-embed,
+.markdown-preview-view .internal-embed.file-embed {
+  display: block !important;
+  background-color: var(--bg-highlight) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-left: 4px solid var(--accent-1) !important;
+  border-radius: 4px 10px 10px 4px !important;
+  padding: 14px 18px !important;
+  margin: 20px 0 !important;
+  color: var(--text-secondary) !important;
+  font-size: 0.92em !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* ── Nota embebida (transclusion) ───────────────────────────── */
+.markdown-preview-view .internal-embed.markdown-embed {
+  border-radius: 10px !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-left: 4px solid var(--accent-primary) !important;
+  background-color: var(--bg-highlight) !important;
+  margin: 22px 0 !important;
+  padding: 0 !important;
+  box-shadow: var(--shadow-float) !important;
+  overflow: hidden !important;
+}
+.markdown-preview-view .internal-embed.markdown-embed .markdown-embed-title {
+  background-color: color-mix(in srgb, var(--accent-primary) 10%, transparent) !important;
+  color: var(--accent-primary) !important;
+  font-size: 0.75em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+  padding: 8px 16px !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+.markdown-preview-view .internal-embed.markdown-embed .markdown-embed-content {
+  padding: 12px 18px 16px !important;
+}
+
+/* ── Enlace externo con icono ───────────────────────────────── */
+.markdown-preview-view a.external-link {
+  color: var(--link-color) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid transparent !important;
+  transition: color 0.2s, border-color 0.2s !important;
+  padding-right: 0 !important; /* evita salto por el ::after */
+}
+.markdown-preview-view a.external-link::after {
+  content: "" !important;
+  display: inline-block !important;
+  width: 11px !important;
+  height: 11px !important;
+  margin-left: 4px !important;
+  vertical-align: middle !important;
+  opacity: 0.55 !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  transition: opacity 0.2s !important;
+}
+.theme-dark .markdown-preview-view a.external-link::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7' stroke='%2387ADC6' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M7 1h4v4' stroke='%2387ADC6' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11 1L5.5 6.5' stroke='%2387ADC6' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+}
+.theme-light .markdown-preview-view a.external-link::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7' stroke='%23507040' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M7 1h4v4' stroke='%23507040' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11 1L5.5 6.5' stroke='%23507040' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+}
+.markdown-preview-view a.external-link:hover::after { opacity: 1 !important; }
+
+/* ── Enlace de descarga (archivo adjunto local) ─────────────── */
+.markdown-preview-view a[href$=".pdf"],
+.markdown-preview-view a[href$=".zip"],
+.markdown-preview-view a[href$=".rar"],
+.markdown-preview-view a[href$=".docx"],
+.markdown-preview-view a[href$=".xlsx"],
+.markdown-preview-view a[href$=".pptx"],
+.markdown-preview-view a[href$=".csv"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background-color: var(--bg-highlight) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: 6px !important;
+  padding: 3px 10px 3px 8px !important;
+  font-size: 0.88em !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: background 0.18s, box-shadow 0.18s !important;
+  vertical-align: middle !important;
+}
+.markdown-preview-view a[href$=".pdf"]:hover,
+.markdown-preview-view a[href$=".zip"]:hover,
+.markdown-preview-view a[href$=".rar"]:hover,
+.markdown-preview-view a[href$=".docx"]:hover,
+.markdown-preview-view a[href$=".xlsx"]:hover,
+.markdown-preview-view a[href$=".pptx"]:hover,
+.markdown-preview-view a[href$=".csv"]:hover {
+  background-color: var(--sidebar-active) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+/* Iconito de descarga antes del texto */
+.markdown-preview-view a[href$=".pdf"]::before,
+.markdown-preview-view a[href$=".zip"]::before,
+.markdown-preview-view a[href$=".rar"]::before,
+.markdown-preview-view a[href$=".docx"]::before,
+.markdown-preview-view a[href$=".xlsx"]::before,
+.markdown-preview-view a[href$=".pptx"]::before,
+.markdown-preview-view a[href$=".csv"]::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 13px !important;
+  height: 13px !important;
+  flex-shrink: 0 !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+.theme-dark .markdown-preview-view a[href$=".pdf"]::before,
+.theme-dark .markdown-preview-view a[href$=".zip"]::before,
+.theme-dark .markdown-preview-view a[href$=".rar"]::before,
+.theme-dark .markdown-preview-view a[href$=".docx"]::before,
+.theme-dark .markdown-preview-view a[href$=".xlsx"]::before,
+.theme-dark .markdown-preview-view a[href$=".pptx"]::before,
+.theme-dark .markdown-preview-view a[href$=".csv"]::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 13' fill='none'%3E%3Cpath d='M6.5 1v7M4 6l2.5 2.5L9 6' stroke='%2387ADC6' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 10h9' stroke='%2387ADC6' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+}
+.theme-light .markdown-preview-view a[href$=".pdf"]::before,
+.theme-light .markdown-preview-view a[href$=".zip"]::before,
+.theme-light .markdown-preview-view a[href$=".rar"]::before,
+.theme-light .markdown-preview-view a[href$=".docx"]::before,
+.theme-light .markdown-preview-view a[href$=".xlsx"]::before,
+.theme-light .markdown-preview-view a[href$=".pptx"]::before,
+.theme-light .markdown-preview-view a[href$=".csv"]::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 13' fill='none'%3E%3Cpath d='M6.5 1v7M4 6l2.5 2.5L9 6' stroke='%23507040' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 10h9' stroke='%23507040' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+}
+
+
+/* §B ══════════════════════════════════════════════════════════════
+   FIX text-transform EN CALLOUTS MATEMÁTICOS
+   Los callouts base tienen text-transform: uppercase en .callout-title.
+   Los entornos matemáticos que lo heredan no deben convertir todo a
+   mayúsculas porque δ ≠ Δ, etc.  Sobreescribimos solo el título.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Entornos que tienen contenido matemático sensible a case */
+.callout[data-callout="teorema"]    .callout-title,
+.callout[data-callout="demostracion"] .callout-title,
+.callout[data-callout="demo"]       .callout-title,
+.callout[data-callout="proof"]      .callout-title,
+.callout[data-callout="teoria"]     .callout-title,
+.callout[data-callout="definicion"] .callout-title,
+.callout[data-callout="def"]        .callout-title,
+.callout[data-callout="corolario"]  .callout-title,
+.callout[data-callout="lema"]       .callout-title,
+.callout[data-callout="proposicion"] .callout-title,
+.callout[data-callout="prop"]       .callout-title,
+.callout[data-callout="axioma"]     .callout-title,
+.callout[data-callout="ejemplo"]    .callout-title,
+.callout[data-callout="ej"]         .callout-title {
+  /* Preservar capitalización original del texto */
+  text-transform: none !important;
+}
+
+/* El contenido matemático tampoco debe forzar mayúsculas */
+.callout[data-callout="teorema"]    .callout-content,
+.callout[data-callout="demostracion"] .callout-content,
+.callout[data-callout="demo"]       .callout-content,
+.callout[data-callout="proof"]      .callout-content,
+.callout[data-callout="teoria"]     .callout-content,
+.callout[data-callout="definicion"] .callout-content,
+.callout[data-callout="def"]        .callout-content,
+.callout[data-callout="corolario"]  .callout-content,
+.callout[data-callout="lema"]       .callout-content,
+.callout[data-callout="proposicion"] .callout-content,
+.callout[data-callout="prop"]       .callout-content,
+.callout[data-callout="axioma"]     .callout-content,
+.callout[data-callout="ejemplo"]    .callout-content,
+.callout[data-callout="ej"]         .callout-content {
+  text-transform: none !important;
+}
+
+/* Asegurar que MathJax dentro de callouts matemáticos
+   tampoco sufra transformaciones de texto */
+.callout[data-callout="teorema"] mjx-container,
+.callout[data-callout="demostracion"] mjx-container,
+.callout[data-callout="demo"] mjx-container,
+.callout[data-callout="proof"] mjx-container,
+.callout[data-callout="teoria"] mjx-container,
+.callout[data-callout="definicion"] mjx-container,
+.callout[data-callout="def"] mjx-container,
+.callout[data-callout="corolario"] mjx-container,
+.callout[data-callout="lema"] mjx-container,
+.callout[data-callout="proposicion"] mjx-container,
+.callout[data-callout="prop"] mjx-container,
+.callout[data-callout="axioma"] mjx-container,
+.callout[data-callout="ejemplo"] mjx-container,
+.callout[data-callout="ej"] mjx-container {
+  text-transform: none !important;
+}
+
+
+/* §C ══════════════════════════════════════════════════════════════
+   FIX INDENTACIÓN — Listas y viñetas dentro de callouts
+   El padding izquierdo del .callout-content (12-22px) consume
+   el espacio de indentación nativo de las listas. Lo reponemos.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Todas las listas dentro de cualquier callout */
+.callout .callout-content ul,
+.callout .callout-content ol {
+  padding-left: 1.6em !important;
+  margin: 6px 0 !important;
+}
+
+/* Listas anidadas */
+.callout .callout-content ul ul,
+.callout .callout-content ol ol,
+.callout .callout-content ul ol,
+.callout .callout-content ol ul {
+  padding-left: 1.4em !important;
+  margin: 2px 0 !important;
+}
+
+/* Ítems de lista — separación vertical */
+.callout .callout-content li {
+  margin: 3px 0 !important;
+  line-height: 1.80 !important;
+}
+
+/* Marcadores visibles y con color correcto */
+.callout .callout-content ul li::marker {
+  color: var(--accent-1) !important;
+}
+.callout .callout-content ol li::marker {
+  color: var(--accent-2) !important;
+  font-weight: 700 !important;
+}
+
+/* Casos específicos con padding izquierdo reducido (lema, teoría, ejemplo)
+   que necesitan un poco más de margen interno */
+.callout[data-callout="lema"]       .callout-content ul,
+.callout[data-callout="lema"]       .callout-content ol,
+.callout[data-callout="teoria"]     .callout-content ul,
+.callout[data-callout="teoria"]     .callout-content ol,
+.callout[data-callout="ejemplo"]    .callout-content ul,
+.callout[data-callout="ejemplo"]    .callout-content ol,
+.callout[data-callout="ej"]         .callout-content ul,
+.callout[data-callout="ej"]         .callout-content ol,
+.callout[data-callout="demostracion"] .callout-content ul,
+.callout[data-callout="demostracion"] .callout-content ol,
+.callout[data-callout="demo"]       .callout-content ul,
+.callout[data-callout="demo"]       .callout-content ol,
+.callout[data-callout="proof"]      .callout-content ul,
+.callout[data-callout="proof"]      .callout-content ol {
+  padding-left: 2em !important;
+}
+
+/* Blockquotes dentro de callouts — también necesitan margen */
+.callout .callout-content blockquote {
+  margin-left: 0.4em !important;
+  margin-right: 0 !important;
 }
